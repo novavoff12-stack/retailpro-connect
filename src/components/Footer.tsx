@@ -36,7 +36,12 @@ const Footer = () => {
           </div>
         </div>
         <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between gap-4 text-sm text-muted-foreground">
-          <p>© 2026 RetailPro Roblox. All rights reserved. Not affiliated with Roblox Corporation.</p>
+          <div className="space-y-1">
+            <p>© 2026 RetailPro Roblox. All rights reserved. Not affiliated with Roblox Corporation.</p>
+            <a href="mailto:support@retailpro.space" className="hover:text-foreground transition-smooth">
+              support@retailpro.space
+            </a>
+          </div>
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-foreground transition-smooth">Privacy</Link>
             <Link to="/terms" className="hover:text-foreground transition-smooth">Terms</Link>
