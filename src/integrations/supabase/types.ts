@@ -14,16 +14,317 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bots: {
+        Row: {
+          application_id: string
+          avatar_url: string | null
+          bot_name: string | null
+          bot_token: string
+          created_at: string
+          id: string
+          owner_user_id: string
+          public_key: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          application_id: string
+          avatar_url?: string | null
+          bot_name?: string | null
+          bot_token: string
+          created_at?: string
+          id?: string
+          owner_user_id: string
+          public_key: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          application_id?: string
+          avatar_url?: string | null
+          bot_name?: string | null
+          bot_token?: string
+          created_at?: string
+          id?: string
+          owner_user_id?: string
+          public_key?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      guilds: {
+        Row: {
+          bot_id: string
+          created_at: string
+          guild_id: string
+          guild_name: string | null
+          id: string
+          log_channel_id: string | null
+          modmail_category_id: string | null
+          staff_role_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          bot_id: string
+          created_at?: string
+          guild_id: string
+          guild_name?: string | null
+          id?: string
+          log_channel_id?: string | null
+          modmail_category_id?: string | null
+          staff_role_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bot_id?: string
+          created_at?: string
+          guild_id?: string
+          guild_name?: string | null
+          id?: string
+          log_channel_id?: string | null
+          modmail_category_id?: string | null
+          staff_role_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guilds_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          discord_avatar: string | null
+          discord_id: string | null
+          discord_username: string | null
+          email: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          discord_avatar?: string | null
+          discord_id?: string | null
+          discord_username?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          discord_avatar?: string | null
+          discord_id?: string | null
+          discord_username?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      role_bindings: {
+        Row: {
+          bot_id: string
+          created_at: string
+          discord_role_id: string
+          guild_id: string
+          id: string
+          vault_product_id: string
+          vault_product_name: string | null
+        }
+        Insert: {
+          bot_id: string
+          created_at?: string
+          discord_role_id: string
+          guild_id: string
+          id?: string
+          vault_product_id: string
+          vault_product_name?: string | null
+        }
+        Update: {
+          bot_id?: string
+          created_at?: string
+          discord_role_id?: string
+          guild_id?: string
+          id?: string
+          vault_product_id?: string
+          vault_product_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "role_bindings_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ticket_messages: {
+        Row: {
+          author_discord_id: string
+          author_username: string | null
+          content: string | null
+          created_at: string
+          id: string
+          is_staff: boolean
+          ticket_id: string
+        }
+        Insert: {
+          author_discord_id: string
+          author_username?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          is_staff?: boolean
+          ticket_id: string
+        }
+        Update: {
+          author_discord_id?: string
+          author_username?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          is_staff?: boolean
+          ticket_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ticket_messages_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tickets: {
+        Row: {
+          bot_id: string
+          channel_id: string | null
+          closed_at: string | null
+          created_at: string
+          guild_id: string
+          id: string
+          opened_at: string
+          status: string
+          user_discord_id: string
+        }
+        Insert: {
+          bot_id: string
+          channel_id?: string | null
+          closed_at?: string | null
+          created_at?: string
+          guild_id: string
+          id?: string
+          opened_at?: string
+          status?: string
+          user_discord_id: string
+        }
+        Update: {
+          bot_id?: string
+          channel_id?: string | null
+          closed_at?: string | null
+          created_at?: string
+          guild_id?: string
+          id?: string
+          opened_at?: string
+          status?: string
+          user_discord_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tickets_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      trials: {
+        Row: {
+          bot_id: string
+          created_at: string
+          discord_id: string
+          id: string
+          roblox_username: string | null
+          trial_expiration: string
+          trial_started_at: string
+        }
+        Insert: {
+          bot_id: string
+          created_at?: string
+          discord_id: string
+          id?: string
+          roblox_username?: string | null
+          trial_expiration: string
+          trial_started_at?: string
+        }
+        Update: {
+          bot_id?: string
+          created_at?: string
+          discord_id?: string
+          id?: string
+          roblox_username?: string | null
+          trial_expiration?: string
+          trial_started_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trials_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      owns_bot: { Args: { _bot_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +451,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
